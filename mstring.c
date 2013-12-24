@@ -1,11 +1,12 @@
 #include "mstring.h"
 #include <string.h>
+#include <stdio.h>
 
 extern int Main(mstr);
 
 size_t mstrsize(mstr src){
 	size_t count = 2;
-	while(*src++ && *src) count++;
+	while(*src++ || *src) count++;
 	return count;
 }
 
@@ -17,9 +18,12 @@ mstr mstradd(mstr dest, const char *src){
 	return dest;
 }
 
-mstr mstrinit(size_t size){
+mstr mstrinit(const char *src, size_t size){
+	if(!size) size = strlen(src) + 2;
 	mstr new_mstr = (mstr)malloc(size * sizeof(mstr));
-	new_mstr[0] = new_mstr[1] = 0;
+	//new_mstr[0] = new_mstr[1] = 0;
+	strncpy(new_mstr, src, size);
+	new_mstr[size-2] = new_mstr[size-1] = 0;
 	return new_mstr;
 }
 
@@ -31,17 +35,34 @@ int mstrcount(mstr src){
 	}
 }
 
-int putms(mstr s, unsigned int i){
-	unsigned int count = 0;
-	while(count == i) if(!*s++) count++;
-	if(!count && !s[-1] && !s[-2]) return 0;
-	return puts(s);
+char *mstrindex(mstr s, unsigned int i){
+	unsigned int count = 1;
+	while(count != i) if(!*s++) count++;
+	if(count != 1 && !s[-1] && !s[-2]) return NULL;
+	return s;
+}
+
+int putmss(mstr s, unsigned int i){
+	if(!i) return 0;
+	return puts(mstrindex(s, i));
+}
+
+int putms(mstr s){
+	int i, r = 0, t = mstrcount(s);
+	for(i=1; i<=t; i++) r += putmss(s, i);
+	return r;
 }
 
 int main(int argc, char **argv){
-	mstr args = mstrinit(strlen(*argv));
-	mstradd(args, argv[0]);
+	size_t len = strlen(*argv) + 1;
+	mstr args = mstrinit(*argv, len + 1);
+	//mstradd(args, argv[0]);
+	while(*(++argv)){
+		len += strlen(*argv) + 1;
+		args = realloc(args, len);
+		if(!args) return -1;
+		mstradd(args, *argv);
+	}
 
 	return Main(args);
 }
-
