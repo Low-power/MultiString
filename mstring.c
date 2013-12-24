@@ -2,8 +2,6 @@
 #include <string.h>
 #include <stdio.h>
 
-extern int Main(mstr);
-
 size_t mstrsize(mstr src){
 	size_t count = 2;
 	while(*src++ || *src) count++;
@@ -20,8 +18,7 @@ mstr mstradd(mstr dest, const char *src){
 
 mstr mstrinit(const char *src, size_t size){
 	if(!size) size = strlen(src) + 2;
-	mstr new_mstr = (mstr)malloc(size * sizeof(mstr));
-	//new_mstr[0] = new_mstr[1] = 0;
+	mstr new_mstr = (mstr)malloc(size * sizeof(char));
 	strncpy(new_mstr, src, size);
 	new_mstr[size-2] = new_mstr[size-1] = 0;
 	return new_mstr;
@@ -51,18 +48,4 @@ int putms(mstr s){
 	int i, r = 0, t = mstrcount(s);
 	for(i=1; i<=t; i++) r += putmss(s, i);
 	return r;
-}
-
-int main(int argc, char **argv){
-	size_t len = strlen(*argv) + 1;
-	mstr args = mstrinit(*argv, len + 1);
-	//mstradd(args, argv[0]);
-	while(*(++argv)){
-		len += strlen(*argv) + 1;
-		args = realloc(args, len);
-		if(!args) return -1;
-		mstradd(args, *argv);
-	}
-
-	return Main(args);
 }

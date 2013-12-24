@@ -12,6 +12,8 @@ int mstrcount(mstr);
 char *mstrindex(mstr, unsigned int);
 int putmss(mstr, unsigned int);
 int putms(mstr);
+void *malloc(size_t);
+void *realloc(void *, size_t);
 void free(void *);
 
 #endif
