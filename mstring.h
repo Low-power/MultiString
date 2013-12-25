@@ -4,6 +4,7 @@
 #include <stddef.h>
 
 typedef char *mstr;
+typedef mstr MultiString;
 
 size_t mstrsize(mstr);
 mstr mstradd(mstr, const char *);

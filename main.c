@@ -3,10 +3,10 @@
 
 extern int Main(mstr);
 
-int main(int argc, char **argv){
+int main(int argc, char **argv) {
 	size_t len = strlen(*argv) + 2;
 	mstr args = mstrinit(*argv, len);
-	while(*(++argv)){
+	while(*(++argv)) {
 		len += strlen(*argv) + 1;
 		args = realloc(args, len);
 		if(!args) return -1;
