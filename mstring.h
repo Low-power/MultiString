@@ -7,13 +7,18 @@ typedef char *mstr;
 
 size_t mstrsize(mstr);
 mstr mstradd(mstr, const char *);
+mstr mstradd_r(mstr *, const char *);
 mstr mstrinit(const char *, size_t);
 int mstrcount(mstr);
 char *mstrindex(mstr, unsigned int);
 mstr mstrcpy(mstr, mstr);
 mstr mstrdup(mstr);
+
 int putmss(mstr, unsigned int);
 int putms(mstr);
+
+mstr mkmstrl(const char *, ...);
+
 void *malloc(size_t);
 void *realloc(void *, size_t);
 void free(void *);

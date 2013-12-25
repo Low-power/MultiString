@@ -8,7 +8,9 @@ endif
 CFLAGS += -O1 -Wall
 OBJS = \
 	main.o \
-	mstring.o
+	mkmstr.o \
+	mstring.o \
+	mstring-realloc.o
 
 first:	libmstr.a
 
