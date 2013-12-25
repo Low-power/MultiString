@@ -5,11 +5,8 @@ mstr mkmstrl(const char *first, ...){
 	mstr new_mstr = mstrinit(first, 0);
 	va_list ap;
 	va_start(ap, first);
-	char *next = va_arg(ap, char *);
-	while(next){
-		if(!mstradd_r(&new_mstr, next)) return NULL;
-		next = va_arg(ap, char *);
-	}
+	char *next;
+	while(next = va_arg(ap, char *)) if(!mstradd_r(&new_mstr, next)) return NULL;
 	va_end(ap);
 	return new_mstr;
 }
