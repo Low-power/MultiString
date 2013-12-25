@@ -39,6 +39,16 @@ char *mstrindex(mstr s, unsigned int i){
 	return s;
 }
 
+mstr mstrcpy(mstr dest, mstr src){
+	return memcpy(dest, src, mstrsize(src));
+}
+
+mstr mstrdup(mstr s){
+	size_t size = mstrsize(s);
+	mstr new_mstr = (mstr)malloc(size * sizeof(char));
+	return memcpy(new_mstr, s, size);
+}
+
 int putmss(mstr s, unsigned int i){
 	if(!i) return 0;
 	return puts(mstrindex(s, i));

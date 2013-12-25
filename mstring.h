@@ -10,6 +10,8 @@ mstr mstradd(mstr, const char *);
 mstr mstrinit(const char *, size_t);
 int mstrcount(mstr);
 char *mstrindex(mstr, unsigned int);
+mstr mstrcpy(mstr, mstr);
+mstr mstrdup(mstr);
 int putmss(mstr, unsigned int);
 int putms(mstr);
 void *malloc(size_t);
