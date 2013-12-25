@@ -18,6 +18,7 @@ int putmss(mstr, unsigned int);
 int putms(mstr);
 
 mstr mkmstrl(const char *, ...);
+mstr mkmstrv(char **);
 
 void *malloc(size_t);
 void *realloc(void *, size_t);

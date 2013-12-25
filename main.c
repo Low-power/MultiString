@@ -6,7 +6,6 @@ extern int Main(mstr);
 int main(int argc, char **argv){
 	size_t len = strlen(*argv) + 2;
 	mstr args = mstrinit(*argv, len);
-	//mstradd(args, argv[0]);
 	while(*(++argv)){
 		len += strlen(*argv) + 1;
 		args = realloc(args, len);

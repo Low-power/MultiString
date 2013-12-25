@@ -2,7 +2,6 @@
 #include <stdarg.h>
 
 mstr mkmstrl(const char *first, ...){
-	//size_t size = strlen(first) + 2;
 	mstr new_mstr = mstrinit(first, 0);
 	va_list ap;
 	va_start(ap, first);
@@ -11,5 +10,13 @@ mstr mkmstrl(const char *first, ...){
 		if(!mstradd_r(&new_mstr, next)) return NULL;
 		next = va_arg(ap, char *);
 	}
+	va_end(ap);
+	return new_mstr;
+}
+
+mstr mkmstrv(char **v){
+	if(!*v) return NULL;
+	mstr new_mstr = mstrinit(*v, 0);
+	while(*(++v)) if(!mstradd_r(&new_mstr, *v)) return NULL;
 	return new_mstr;
 }

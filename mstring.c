@@ -12,7 +12,7 @@ mstr mstradd(mstr dest, const char *src){
 	size_t size_orig = mstrsize(dest);
 	size_t len_src = strlen(src) + 1;
 	memcpy(dest + size_orig - 1, src, len_src);
-	dest[size_orig+len_src] = 0;
+	dest[size_orig+len_src-1] = 0;
 	return dest;
 }
 
