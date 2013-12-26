@@ -8,7 +8,6 @@ endif
 
 CFLAGS += -O1 -Wall
 
-#ifeq ($(CC)_$(CC), arm-mingw32ce-gcc_i586-mingw32msvc-gcc)
 ifeq ($(CC), $(filter $(CC), arm-mingw32ce-gcc i586-mingw32msvc-gcc))
 DLIB_SUFFIX = .dll
 else
@@ -17,13 +16,9 @@ DLIB_SUFFIX = .so
 CFLAGS += -fPIC
 endif
 
-OBJS = \
-	mkmstr.o \
-	mstring.o \
-	mstring-realloc.o \
-	putms.o
+include objects.mk
 
-first:	libmstr.a
+first:	libmstr.a $(DLIB_PREFIX)mstr$(DLIB_SUFFIX)
 
 libmstr.a:	$(OBJS) main.o
 	$(AR) r $@ $^
