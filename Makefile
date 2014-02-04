@@ -32,3 +32,5 @@ install:	libmstr.a mstring.h
 
 clean:
 	rm -f *.o *.a *.so *.dll
+
+include main.mk
